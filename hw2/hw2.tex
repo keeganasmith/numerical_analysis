@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 \\ Homework 2}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+
+\lstset{ %
+  backgroundcolor=\color{lightgray},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{blue},           % color for keywords
+  commentstyle=\color{green},          % color for comments
+  stringstyle=\color{red},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\begin{enumerate}[label=\alph*.)]
+\item 
+Requirements to converge quadratically: \\
+\[
+g'(x*) = 0
+\]
+\[
+g''(x) \leq M
+\]
+In our case, from newton's method: \\
+\[
+g(x) = x - \frac{e^x - x - 1}{e^x - 1}
+\]
+Thus we have:
+\begin{align*}
+g'(x) &= 1 - (\frac{e^x - 1}{e^x-1})(-e^x(\frac{e^x - x - 1}{(e^x - 1)^2}) \\
+&= 1 + e^x(\frac{e^x - x - 1}{(e^x - 1)^2}) \\
+g'(0) &= 1 + 1(\frac{1 - 0 - 1}{(1 - 1)^2}) \\
+&= 1 + \frac{0}{0} 
+\end{align*}
+So $g'(0)$ is undefined, and thus does not satisfy the condition for quadratic convergence.
+\end{enumerate}
+\end{document}

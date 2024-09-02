@@ -1,0 +1,210 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 \\ Homework 1}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+
+\lstset{ %
+  backgroundcolor=\color{lightgray},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{blue},           % color for keywords
+  commentstyle=\color{green},          % color for comments
+  stringstyle=\color{red},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+I implemented Heron's algorithm like so:
+\begin{lstlisting}[language=Python]
+import sys
+sys.setrecursionlimit(20000)
+MAX_DEPTH = 1000;
+def heron_rec(num, approx, depth):
+    if(depth >= MAX_DEPTH):
+        return approx;
+    next_approx = .5 * approx + .5 * (num / approx)
+    return heron_rec(num, next_approx, depth  +1)
+
+if __name__ == "__main__":
+    num = int(input("Enter a number: "))
+    result = heron_rec(num, num / 2, 1)
+    print(f"sqrt of {num} is approx. {result}")
+\end{lstlisting}
+sqrt of 2 is approx. 1.414213562373095 \\
+sqrt of 10 is approx. 3.162277660168379 \\
+sqrt of 1000 is approx. 31.622776601683793 \\
+I implemented Heron's algorithm by recognizing the recursive nature of the formula. Because of this, I thought a recursive approach for the implementation would be most suitable, however an iterative solution is also very do-able (and also an iterative solution would have been much more efficient). All I needed were variables to keep track of the current approximation, the current depth (number of iterations), and the original number. The results of this implementation were quite good. Even with a depth of 1000, the algorithm is accurate up to around 17 significant figures. It is important to note that with larger numbers ($> 10^7$) this implementation starts to deteriorate; for instance, the output of $10^7$ is $3162.277660168379$, which is about $4.547473508864641e-13$ off.\\
+
+\section*{Problem 2}
+\begin{enumerate}[label=\alph*.)]
+\item 
+\begin{align*}
+f(x) &= x^3 - 2 \\
+f'(x) &= 3x^2 \\
+\end{align*}
+Newton's method: \\
+\begin{align*}
+x_{n+1} &= x_n - \frac{f(x_n)}{f'(x_n)} \\
+x_{n+1} &= x_n - \frac{x_n^3 - 2}{3x_n^2} \quad \mbox{Plugging in our values for $f(x), f'(x)$}\\
+\end{align*}
+Thus we have:
+\[
+g_3(x) = x - \frac{x^3 - 2}{3x^2} 
+\]
+\item joe\\
+\begin{table}[h]
+\centering
+\caption{$g_1(x)$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Iteration & Approximation & Residual & Error \\
+\hline
+0 & 1.500000e+00 & 1.375000e+00 & 2.400790e-01 \\
+\hline
+1 & 1.041667e+00 & -8.697193e-01 & 2.182544e-01 \\
+\hline
+2 & 1.331573e+00 & 3.609949e-01 & 7.165206e-02 \\
+\hline
+3 & 1.211241e+00 & -2.229805e-01 & 4.867957e-02 \\
+\hline
+4 & 1.285568e+00 & 1.246405e-01 & 2.564725e-02 \\
+\hline
+5 & 1.244021e+00 & -7.476562e-02 & 1.589960e-02 \\
+\hline
+6 & 1.268943e+00 & 4.327432e-02 & 9.022275e-03 \\
+\hline
+7 & 1.254519e+00 & -2.561763e-02 & 5.402498e-03 \\
+\hline
+8 & 1.263058e+00 & 1.497488e-02 & 3.136712e-03 \\
+\hline
+9 & 1.258066e+00 & -8.820482e-03 & 1.854915e-03 \\
+\hline
+10 & 1.261006e+00 & 5.172615e-03 & 1.085246e-03 \\
+\hline
+11 & 1.259282e+00 & -3.041309e-03 & 6.389589e-04 \\
+\hline
+12 & 1.260296e+00 & 1.785456e-03 & 3.748109e-04 \\
+\hline
+13 & 1.259701e+00 & -1.049127e-03 & 2.203413e-04 \\
+\hline
+14 & 1.260050e+00 & 6.161378e-04 & 1.293675e-04 \\
+\hline
+15 & 1.259845e+00 & -3.619614e-04 & 7.601172e-05 \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[h]
+\centering
+\caption{$g_2(x)$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Iteration & Approximation & Residual & Error \\
+\hline
+0 & 1.500000e+00 & 1.375000e+00 & 2.400790e-01 \\
+\hline
+1 & 8.888889e-01 & -1.297668e+00 & 3.710322e-01 \\
+\hline
+2 & 2.531250e+00 & 1.421829e+01 & 1.271329e+00 \\
+\hline
+3 & 3.121475e-01 & -1.969586e+00 & 9.477735e-01 \\
+\hline
+4 & 2.052628e+01 & 8.646295e+03 & 1.926636e+01 \\
+\hline
+5 & 4.746895e-03 & -2.000000e+00 & 1.255174e+00 \\
+\hline
+6 & 8.875865e+04 & 6.992493e+14 & 8.875739e+04 \\
+\hline
+7 & 2.538684e-10 & -2.000000e+00 & 1.259921e+00 \\
+\hline
+8 & 3.103221e+19 & 2.988395e+58 & 3.103221e+19 \\
+\hline
+9 & 2.076848e-39 & -2.000000e+00 & 1.259921e+00 \\
+\hline
+10 & 4.636825e+77 & 9.969245e+232 & 4.636825e+77 \\
+\hline
+11 & 9.302260e-156 & -2.000000e+00 & 1.259921e+00 \\
+\hline
+12 & inf & inf & inf \\
+\hline
+13 & 0.000000e+00 & -2.000000e+00 & 1.259921e+00 \\
+\hline
+14 & inf & inf & inf \\
+\hline
+15 & 0.000000e+00 & -2.000000e+00 & 1.259921e+00 \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[h]
+\centering
+\caption{$g_3(x)$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Iteration & Approximation & Residual & Error \\
+\hline
+0 & 1.500000e+00 & 1.375000e+00 & 2.400790e-01 \\
+\hline
+1 & 1.296296e+00 & 1.782757e-01 & 3.637525e-02 \\
+\hline
+2 & 1.260932e+00 & 4.819286e-03 & 1.011175e-03 \\
+\hline
+3 & 1.259922e+00 & 3.860583e-06 & 8.106711e-07 \\
+\hline
+4 & 1.259921e+00 & 2.483791e-12 & 5.215828e-13 \\
+\hline
+5 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+6 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+7 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+8 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+9 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+10 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+11 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+12 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+13 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+14 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+15 & 1.259921e+00 & 0.000000e+00 & 0.000000e+00 \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{enumerate}
+
+\end{document}
