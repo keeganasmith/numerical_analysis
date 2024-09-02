@@ -42,7 +42,55 @@
 \maketitle
 \section*{Problem 1}
 \begin{enumerate}[label=\alph*.)]
-\item 
+\item The first 20 iterations of the Newton method are shown below: \\
+\begin{tabular}{|c|c|c|c|}
+\hline
+Iteration & Approximation & Residual\\
+\hline
+0 & 1.000000e+00 & 7.182818e-01\\
+\hline
+1 & 5.819767e-01 & 2.075957e-01\\
+\hline
+2 & 3.190550e-01 & 5.677201e-02\\
+\hline
+3 & 1.679962e-01 & 1.493591e-02\\
+\hline
+4 & 8.634887e-02 & 3.837726e-03\\
+\hline
+5 & 4.379570e-02 & 9.731870e-04\\
+\hline
+6 & 2.205769e-02 & 2.450693e-04\\
+\hline
+7 & 1.106939e-02 & 6.149235e-05\\
+\hline
+8 & 5.544905e-03 & 1.540144e-05\\
+\hline
+9 & 2.775014e-03 & 3.853917e-06\\
+\hline
+10 & 1.388149e-03 & 9.639248e-07\\
+\hline
+11 & 6.942351e-04 & 2.410369e-07\\
+\hline
+12 & 3.471577e-04 & 6.026621e-08\\
+\hline
+13 & 1.735889e-04 & 1.506742e-08\\
+\hline
+14 & 8.679696e-05 & 3.766965e-09\\
+\hline
+15 & 4.339911e-05 & 9.417547e-10\\
+\hline
+16 & 2.169971e-05 & 2.354406e-10\\
+\hline
+17 & 1.084989e-05 & 5.886025e-11\\
+\hline
+18 & 5.424958e-06 & 1.471512e-11\\
+\hline
+19 & 2.712481e-06 & 3.678613e-12\\
+\hline
+20 & 1.356302e-06 & 9.199308e-13\\
+\hline
+\end{tabular} \\ 
+From the above, we can see that Newton's method converges, but not as quickly as we would like. \\
 Requirements to converge quadratically: \\
 \[
 g'(x*) = 0
@@ -56,11 +104,44 @@ g(x) = x - \frac{e^x - x - 1}{e^x - 1}
 \]
 Thus we have:
 \begin{align*}
-g'(x) &= 1 - (\frac{e^x - 1}{e^x-1})(-e^x(\frac{e^x - x - 1}{(e^x - 1)^2}) \\
-&= 1 + e^x(\frac{e^x - x - 1}{(e^x - 1)^2}) \\
-g'(0) &= 1 + 1(\frac{1 - 0 - 1}{(1 - 1)^2}) \\
-&= 1 + \frac{0}{0} 
+g'(x) &= 1 - ((-e^x)(e^x-1)^{-2}(e^x-x-1) + (e^x - 1)^{-1}(e^x - 1)) \\
+g'(0) &= 1 - ((-1)(1-1)^{-2}(1-0 - 1) + \frac{0}{0}) \\
 \end{align*}
-So $g'(0)$ is undefined, and thus does not satisfy the condition for quadratic convergence.
+So $g'(0)$ is undefined, and thus does not satisfy the condition for quadratic convergence. \\
+\item Start with $\mu(x)$ and $\mu'(x)$:
+\[
+\mu(x) = \frac{f(x)}{f'(x)}
+\]
+\begin{align*}
+\mu'(x) &=\frac{d}{dx}(f(x)(f'(x))^{-1} \\
+&= \frac{f'(x)}{f'(x)} + (-1)\cdot f''(x) \cdot f'(x)^{-2} \cdot f(x) \\
+&= \frac{f'(x)}{f'(x)} - \frac{f''(x) \cdot f(x)}{f'(x)^2}\\
+\end{align*}
+Plugging into $g(x)$: \\
+\begin{align*}
+g(x) &= x - \frac{\mu(x)}{\mu'(x)} \\
+&= x - \frac{f(x)}{f'(x) \cdot ( \frac{f'(x)}{f'(x)} - \frac{f''(x) \cdot f(x)}{f'(x)^2})}\\
+&= x - \frac{f(x)}{\frac{f'(x)^2}{f'(x)} - \frac{f''(x) \cdot f(x)}{f'(x)}} \\
+&=  x - \frac{f(x)}{f'(x)^{-1}(f'(x)^2 - f''(x) \cdot f(x))} \\
+&= x - \frac{f(x) \cdot f'(x)}{f'(x)^2 - f''(x) \cdot f(x)} \\
+\end{align*}
+\item We can see that the new $g(x)$ is approximately correct within the first 5 iterations: \\
+\begin{tabular}{|c|c|c|c|}
+\hline
+Iteration & Approximation & Residual\\
+\hline
+0 & 1.000000e+00 & 7.182818e-01\\
+\hline
+1 & -2.342106e-01 & 2.540578e-02\\
+\hline
+2 & -8.458280e-03 & 3.567061e-05\\
+\hline
+3 & -1.189018e-05 & 7.068790e-11\\
+\hline
+4 & -4.218591e-11 & 0.000000e+00\\
+\hline
+5 & -4.218591e-11 & 0.000000e+00\\
+\hline
+\end{tabular}
 \end{enumerate}
 \end{document}
