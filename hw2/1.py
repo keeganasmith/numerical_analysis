@@ -17,17 +17,19 @@ def b(x):
     return x - (x**3 - 21)/(3 * x**2)
 def c(x):
     return x - (x**4 - 21 * x) / (x**2 - 21)
-def compute(initial_x, function, f_function = None):
+def compute(initial_x, function, f_function):
     result = "\\begin{tabular}{|c|c|c|c|}\n"
     result += "\\hline\n"
-    result += "Iteration & Approximation & Error\\\\\n"
+    result += "Iteration & Approximation & Error & Residual\\\\\n"
     result += "\\hline\n"
     curr_approx = initial_x
     error = abs(curr_approx - EXPECTED)
+    residual = f_function(curr_approx)
     for i in range(0, NUM_ITER):
-        result += f"{i} & {curr_approx:.6e} & {error:.6e}\\\\\n"
+        result += f"{i} & {curr_approx:.6e} & {error:.6e} & {residual:.6e}\\\\\n"
         result += "\\hline\n"
         curr_approx = function(curr_approx)
+        residual = f_function(curr_approx)
         error = abs(curr_approx - EXPECTED)
     result += "\\end{tabular}\n"
 
@@ -43,7 +45,7 @@ function_mapping = {
 }
 if __name__ == "__main__":
     initial_num = float(input("enter initial num: "))
-    my_func = input("enter the name of the function: ")
-    #my_func_2 = input("enter the name of the function (f): ")
-    result = compute(initial_num, function_mapping[my_func])
+    my_func = input("enter the name of the function (g): ")
+    my_func_2 = input("enter the name of the function (f): ")
+    result = compute(initial_num, function_mapping[my_func], function_mapping[my_func_2])
     print(result)
