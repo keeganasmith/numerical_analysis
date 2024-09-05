@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.8.24)  2 SEP 2024 16:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.8.24)  4 SEP 2024 19:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -233,7 +233,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 109--111
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--121
+Overfull \hbox (65.91458pt too wide) detected at line 113
+[]\OT1/cmr/m/n/10 (1 \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 ((\OMS/cmsy/m/n/10 ^^
+@\OML/cmm/m/it/10 e[]\OT1/cmr/m/n/10 )(\OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 ^^
+@ \OT1/cmr/m/n/10 1)[](\OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/
+10 x \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1) + (\OML/cmm/m/it/10 e[] \OMS/cmsy/
+m/n/10 ^^@ \OT1/cmr/m/n/10 1)[](\OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 ^^@ \OT1/
+cmr/m/n/10 1))) = [](1 \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 ([] + 1))[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--122
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--136
 
  []
 
@@ -246,12 +266,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--162
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
@@ -264,20 +279,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 10000) in paragraph at lines 174--177
 
  []
 
 
-Overfull \hbox (11.1121pt too wide) detected at line 179
+Underfull \hbox (badness 10000) in paragraph at lines 185--188
+
+ []
+
+
+Overfull \hbox (11.1121pt too wide) detected at line 194
 []
- []
-
-(C:\Users\keegan\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-Underfull \hbox (badness 10000) in paragraph at lines 181--296
-
  []
 
 
@@ -289,6 +302,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [4]
+(C:\Users\keegan\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Underfull \hbox (badness 10000) in paragraph at lines 196--311
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.43335pt, for example:
@@ -324,11 +344,11 @@ L3 programming layer <2024-01-04>
 Here is how much of TeX's memory you used:
  4933 strings out of 474486
  75217 string characters out of 5743283
- 2152542 words of memory out of 5000000
+ 2281542 words of memory out of 5000000
  27212 multiletter control sequences out of 15000+600000
  563471 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,12n,93p,415b,2067s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,12n,93p,415b,2063s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmmi10.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type
@@ -343,7 +363,7 @@ sers/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10
 /cm/cmsy5.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmtt9.pfb>
-Output written on hw2.pdf (7 pages, 159165 bytes).
+Output written on hw2.pdf (7 pages, 161630 bytes).
 PDF statistics:
  86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

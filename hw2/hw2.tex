@@ -90,7 +90,7 @@ Iteration & Approximation & Residual\\
 20 & 1.356302e-06 & 9.199308e-13\\
 \hline
 \end{tabular} \\ 
-From the above, we can see that Newton's method converges, but not as quickly as we would like. \\
+From the above, we can see that Newton's method probably converges, but not as quickly as we would like. \\
 Requirements to converge quadratically: \\
 \[
 g'(x*) = 0
@@ -107,7 +107,22 @@ Thus we have:
 g'(x) &= 1 - ((-e^x)(e^x-1)^{-2}(e^x-x-1) + (e^x - 1)^{-1}(e^x - 1)) \\
 g'(0) &= 1 - ((-1)(1-1)^{-2}(1-0 - 1) + \frac{0}{0}) \\
 \end{align*}
-So $g'(0)$ is undefined, and thus does not satisfy the condition for quadratic convergence. \\
+$\frac{0}{0}$ tells us nothing, NOTHING about a function. Thus we will take the limit as $x$ approaches 0: \\
+\[
+\lim_{x \rightarrow 0}( 1 - ((-e^x)(e^x-1)^{-2}(e^x-x-1) + (e^x - 1)^{-1}(e^x - 1))) = \lim_{x \rightarrow 0}(1 - (\frac{(-e^{2x} + xe^x+e^x)}{(e^x-1)^{2}} + 1)) \\
+\]
+\[
+\lim_{x \rightarrow 0}(1 - (\frac{(-e^{2x} + xe^x+e^x)}{(e^x-1)^{2}} + 1)) =  \lim_{x \rightarrow 0}(-\frac{(-e^{2x} + xe^x+e^x)}{(e^x-1)^{2}}) \\
+\]
+Using L'Hopital's:\\
+\[
+ \lim_{x \rightarrow 0}(-\frac{(-e^{2x} + xe^x+e^x)}{(e^x-1)^{2}}) =  \lim_{x \rightarrow 0}(-\frac{(-2e^{2x} + e^x + xe^x+e^x)}{2e^x(e^x-1)})\\
+\]
+This is still $\frac{0}{0}$................use L'Hopital's again. \\
+\[
+ \lim_{x \rightarrow 0}(-\frac{(-2e^{2x} + 2e^x + xe^x)}{2e^x(e^x-1)}) =  \lim_{x \rightarrow 0}(-\frac{(-4e^{2x} + 2e^x + e^x + xe^x)}{2e^x(e^x-1) + 2e^{2x}})\\
+\]
+This finally gives us $\frac{1}{2}$, so we can safely say that since $g'(0) < 1$, $g$ converges, but since $g'(0) \neq 0$, $g$ does not converge quadratically.
 \item Start with $\mu(x)$ and $\mu'(x)$:
 \[
 \mu(x) = \frac{f(x)}{f'(x)}
