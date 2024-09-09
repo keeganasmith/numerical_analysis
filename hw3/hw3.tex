@@ -276,4 +276,46 @@ I ran this on the LAUNCH cluster with 192 cores and achieved a minimum of -3.059
 -0.3935949441846148 \\
 \end{bmatrix}
 \]
+\section*{Problem 3}
+\begin{enumerate}[label=\alph*.)]
+\item The distance from a point $x$ from $\hat{x}$ can be given by: \\
+\begin{align*}
+f(x) &= \sqrt{(x_1 -  0)^2 + (x_2 - \frac{1}{2})^2}\\
+&= \sqrt{x_1^2 + (x_2 - \frac{1}{2})^2}
+\end{align*}
+We are trying to minimize this function with respect to $g(x) = 0$, so we will use Lagrange multipliers and solve the system of equations: \\
+\begin{align*}
+\nabla f(x) - \lambda \nabla g(x) &= 0 \\
+g(x) &= 0
+\end{align*}
+We calculate $\nabla f(x)$: \\
+\begin{align*}
+\nabla f(x) &= \begin{bmatrix}
+2x_1 \cdot \frac{1}{2}(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
+2(x_2 - \frac{1}{2}) \cdot \frac{1}{2}(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
+\end{bmatrix}\\
+&= \begin{bmatrix}
+x_1(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
+(x_2 - \frac{1}{2})(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
+\end{bmatrix}
+\end{align*}
+$\nabla g(x)$: \\
+\begin{align*}
+\nabla g(x) &= \begin{bmatrix}
+3x_1^2 - 1 \\
+-2x_2
+\end{bmatrix}
+\end{align*}
+plugging these into the lagrange system we had above, we get: \\
+\begin{align*}
+\begin{bmatrix}
+x_1(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} - \lambda (3x_1^2 - 1) \\
+(x_2 - \frac{1}{2})(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} - \lambda (-2x_2) \\
+x_1^3 - x_1 + \frac{1}{2} - x_2^2 \\
+\end{bmatrix}
+= 0
+\end{align*}
+three equations, three unknowns. \\
+\item 
+\end{enumerate}
 \end{document}
