@@ -52,7 +52,7 @@ def f(x_tuple):
 if __name__ == "__main__":
     start = -1
     end = 2
-    num_cores = 12
+    num_cores = 192
     batch_size = 20000
     num_attempts = num_cores
     processes = []
