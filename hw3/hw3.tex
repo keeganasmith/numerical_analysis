@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 \\ Homework 3}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{black},           % color for keywords
+  commentstyle=\color{black},          % color for comments
+  stringstyle=\color{black},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+
+\begin{document}
+\maketitle
+\section*{Problem 1}
+Our system of equations can be re-written as:\\
+\begin{align*}
+x_1 + 2x_2 + 3x_3 - \lambda x_1 &= 0 \\
+4x_1 + 5x_2 + 6x_3 - \lambda x_2 &= 0 \\
+7x_1 + 8x_2 + 10x_3 - \lambda x_3 &= 0 \\
+x_1^2 + x_2^2 + x_3^2 - 1 &= 0\\
+\end{align*}
+The jacobian of this system is:\\
+\[
+\begin{bmatrix}
+1 -\lambda & 2 & 3 & -\lambda x_1 \\
+4 & 5 - \lambda & 6 & -x_2 \\
+7 & 8 & 10 - \lambda & -x_3 \\
+2x_1 & 2x_2 & 2x_3 & 0
+\end{bmatrix}
+\] 
+Thus the Newton iteration looks like: \\
+\[
+x^{n+1} = x^n - \begin{bmatrix}
+1 -\lambda & 2 & 3 & -\lambda x^n_1 \\
+4 & 5 - \lambda & 6 & -x^n_2 \\
+7 & 8 & 10 - \lambda & -x^n_3 \\
+2x^n_1 & 2x^n_2 & 2x^n_3 & 0
+\end{bmatrix}^{-1}\begin{bmatrix}
+x^n_1 + 2x^n_2 + 3x^n_3 - \lambda x^n_1 \\
+4x^n_1 + 5x^n_2 + 6x^n_3 - \lambda x^n_2 \\
+7x^n_1 + 8x^n_2 + 10x^n_3 - \lambda x^n_3\\
+(x^n_1)^2 + (x^n_2)^2 + (x^n_3)^2 - 1\\
+\end{bmatrix}
+\]
+\end{document}
