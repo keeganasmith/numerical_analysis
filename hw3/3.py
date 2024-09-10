@@ -1,11 +1,11 @@
 import numpy as np
 import random
 from multiprocessing import Process, Manager
-NUM_ITER = 500
+NUM_ITER = 750
 vector_ranges = [
-    [-1, 0],
-    [-2, -1],
-    [-2, -1]
+    [-1, 1],
+    [-2, 0],
+    [-2, 0]
 ]
 def compute_jacobian_matrix(x_vector):
     my_jacobian = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     start = -100
     end = 100
     num_cores = 192
-    batch_size = 20000
+    batch_size = 30000
     num_attempts = num_cores
     processes = []
     manager = Manager()
