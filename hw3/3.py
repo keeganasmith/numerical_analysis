@@ -51,7 +51,7 @@ if __name__ == "__main__":
     start = -100
     end = 100
     num_cores = 192
-    batch_size = 10000
+    batch_size = 20000
     num_attempts = num_cores
     processes = []
     manager = Manager()
