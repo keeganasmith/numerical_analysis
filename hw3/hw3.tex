@@ -283,7 +283,11 @@ I ran this on the LAUNCH cluster with 192 cores and achieved a minimum of -3.059
 f(x) &= \sqrt{(x_1 -  0)^2 + (x_2 - \frac{1}{2})^2}\\
 &= \sqrt{x_1^2 + (x_2 - \frac{1}{2})^2}
 \end{align*}
-We are trying to minimize this function with respect to $g(x) = 0$, so we will use Lagrange multipliers and solve the system of equations: \\
+Since we are just minimizing $f(x)$, and $f(x)$ is non-negative, finding an $x$ which minimizes $f(x)^2$ will be equivalent to the $x$ which minimizes $f(x)$. Thus for simplicity we will write:\\
+\[
+f(x) = x_1^2 + (x_2 - \frac{1}{2})^2
+\]
+We are minimizing $f(x)$ with constraints, thus we will use lagrange multipliers:\\
 \begin{align*}
 \nabla f(x) - \lambda \nabla g(x) &= 0 \\
 g(x) &= 0
@@ -291,12 +295,8 @@ g(x) &= 0
 We calculate $\nabla f(x)$: \\
 \begin{align*}
 \nabla f(x) &= \begin{bmatrix}
-2x_1 \cdot \frac{1}{2}(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
-2(x_2 - \frac{1}{2}) \cdot \frac{1}{2}(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
-\end{bmatrix}\\
-&= \begin{bmatrix}
-x_1(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
-(x_2 - \frac{1}{2})(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} \\
+2x_1 \\
+2x_2 - 1 \\
 \end{bmatrix}
 \end{align*}
 $\nabla g(x)$: \\
@@ -307,15 +307,34 @@ $\nabla g(x)$: \\
 \end{bmatrix}
 \end{align*}
 plugging these into the lagrange system we had above, we get: \\
-\begin{align*}
+\[
 \begin{bmatrix}
-x_1(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} - \lambda (3x_1^2 - 1) \\
-(x_2 - \frac{1}{2})(x_1^2 + (x_2 - \frac{1}{2})^2)^{-\frac{1}{2}} - \lambda (-2x_2) \\
+2x_1 - \lambda(3x_1^2 - 1) \\
+2x_2 - 1 - \lambda(-2x_2) \\
 x_1^3 - x_1 + \frac{1}{2} - x_2^2 \\
-\end{bmatrix}
-= 0
-\end{align*}
+\end{bmatrix} = 0
+\]
 three equations, three unknowns. \\
-\item 
+\item Now we need to setup the newton iteration. We will start by finding the jacobian of the above system: \\
+\begin{align*}
+J &= \begin{bmatrix}
+2 - 6\lambda x_1 & 0 & -3x_1^2 + 1 \\
+0 & 2 + 2\lambda & 2x_2 \\
+3x_1^2 - 1 & -2x_2 & 0 \\
+\end{bmatrix}
+\end{align*}
+Thus newton's method looks like:\\
+\[
+x_{n+1} = x_{n} -  \begin{bmatrix}
+2 - 6\lambda x_{1n} & 0 & -3x_{n1}^2 + 1 \\
+0 & 2 + 2\lambda & 2x_{n2} \\
+3x_{n1}^2 - 1 & -2x_{n2} & 0 \\
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+2x_{n1} - \lambda(3x_{n1}^2 - 1) \\
+2x_{n2} - 1 - \lambda(-2x_{n2}) \\
+x_{n1}^3 - x_{n1} + \frac{1}{2} - x_{n2}^2 \\
+\end{bmatrix}
+\]
 \end{enumerate}
 \end{document}

@@ -3,17 +3,16 @@ import random
 from multiprocessing import Process, Manager
 NUM_ITER = 500
 def compute_jacobian_matrix(x_vector):
-    my_jacobian = np.array([[0, 0, 0], [0, 1, 0], [0, 0, 1]])
+    my_jacobian = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
     x_1 = x_vector[0][0]
     x_2 = x_vector[1][0]
     x_3 = x_vector[2][0]
-    my_jacobian[0][0] = 3 * x_1**2 - 2*x_2
-    my_jacobian[0][1] = x_3 - 2 * x_1 
-    my_jacobian[0][2] = x_2
-    my_jacobian[1][0] = x_3 - 2 * x_1
-    my_jacobian[1][2] = x_1
-    my_jacobian[2][0] = x_2
-    my_jacobian[2][1] = x_1
+    my_jacobian[0][0] = 2 - 6 * x_1 * x_3
+    my_jacobian[0][2] = -3 * x_2**2 + 1
+    my_jacobian[1][1] = 2 + 2 * x_3
+    my_jacobian[1][2] = 2 * x_2
+    my_jacobian[2][0] = 3 * x_1**2 - 1
+    my_jacobian[2][1] = -2 * x_2
     return my_jacobian
 def compute_f(x_vector):
     my_f = np.array([[0], [0], [0]])
@@ -47,13 +46,12 @@ def perform_iteration(i, start, end, batch_size, lock, global_solutions):
 def f(x_tuple):
     x_1 = x_tuple[0]
     x_2 = x_tuple[1]
-    x_3 = x_tuple[2]
-    return 1/4 * x_1**4 + 1/2 * x_2**2 + 1/2 * x_3**2 + x_1*x_2*x_3 - (x_1)**2 * x_2
+    return (x_1**2 + (x_2 - 1/2)**2)**(1/2)
 if __name__ == "__main__":
-    start = -1
-    end = 2
+    start = -100
+    end = 100
     num_cores = 10
-    batch_size = 20000
+    batch_size = 10000
     num_attempts = num_cores
     processes = []
     manager = Manager()
