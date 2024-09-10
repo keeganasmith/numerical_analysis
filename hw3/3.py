@@ -3,9 +3,9 @@ import random
 from multiprocessing import Process, Manager
 NUM_ITER = 1000
 vector_ranges = [
-    [-1, 1],
-    [-2, 0],
-    [-2, 0]
+    [-10, 10],
+    [-10, 10],
+    [-10, 10]
 ]
 def compute_jacobian_matrix(x_vector):
     my_jacobian = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
@@ -24,9 +24,9 @@ def compute_f(x_vector):
     x_1 = x_vector[0][0]
     x_2 = x_vector[1][0]
     x_3 = x_vector[2][0]
-    my_f[0][0] = x_1**3 + x_2 * x_3 - 2 * x_1 * x_2
-    my_f[1][0] = x_2 + x_1 * x_3 - x_1**2
-    my_f[2][0] = x_3 + x_1 * x_2
+    my_f[0][0] = 2 * x_1 - x_3 * (3*x_1**2 - 1)
+    my_f[1][0] = 2 * x_2 - 1 - x_3 * (-2 * x_2)
+    my_f[2][0] = x_1**3 - x_1 + 1/2 - x_2**2
     return my_f
 def iterate(initial_x):
     for i in range(0, NUM_ITER):
@@ -52,6 +52,10 @@ def f(x_tuple):
     x_1 = x_tuple[0]
     x_2 = x_tuple[1]
     return (x_1**2 + (x_2 - 1/2)**2)**(1/2)
+def g(x_tuple):
+    x_1 = x_tuple[0]
+    x_2 = x_tuple[1]
+    return x_1**3 - x_1 + 1/2 - x_2**2
 if __name__ == "__main__":
     start = -100
     end = 100
@@ -72,7 +76,11 @@ if __name__ == "__main__":
     smallest_sol = None
     for solution in global_solutions:
         result = f(solution)
+        constraint_value = g(solution)
+        if(constraint_value > 10**(-3) or constraint_value < -10**(-3)):
+            continue
         if(result < smallest):
+            print(g(solution))
             smallest_sol = solution
             smallest = result
     
