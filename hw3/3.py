@@ -1,7 +1,7 @@
 import numpy as np
 import random
 from multiprocessing import Process, Manager
-NUM_ITER = 750
+NUM_ITER = 1000
 vector_ranges = [
     [-1, 1],
     [-2, 0],
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     start = -100
     end = 100
     num_cores = 192
-    batch_size = 30000
+    batch_size = 50000
     num_attempts = num_cores
     processes = []
     manager = Manager()
