@@ -80,7 +80,6 @@ if __name__ == "__main__":
         if(constraint_value > 10**(-3) or constraint_value < -10**(-3)):
             continue
         if(result < smallest):
-            print(g(solution))
             smallest_sol = solution
             smallest = result
     
