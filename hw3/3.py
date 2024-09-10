@@ -2,6 +2,11 @@ import numpy as np
 import random
 from multiprocessing import Process, Manager
 NUM_ITER = 500
+vector_ranges = [
+    [-1, 0],
+    [-2, -1],
+    [-2, -1]
+]
 def compute_jacobian_matrix(x_vector):
     my_jacobian = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
     x_1 = x_vector[0][0]
@@ -32,9 +37,9 @@ def iterate(initial_x):
 def perform_iteration(i, start, end, batch_size, lock, global_solutions):
     results = []
     for i in range(0, batch_size):
-        j = random.uniform(start, end)
-        k = random.uniform(start, end)
-        l = random.uniform(start, end)
+        j = random.uniform(vector_ranges[0][0], vector_ranges[0][1])
+        k = random.uniform(vector_ranges[1][0], vector_ranges[1][1])
+        l = random.uniform(vector_ranges[2][0], vector_ranges[2][1])
         try:
             result = tuple(iterate(np.array([[j], [k], [l]])).flatten())
             
