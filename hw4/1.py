@@ -27,32 +27,37 @@ def get_x_coords(interval, num_points):
     end = interval[1];
     result = [];
     result.append(start);
-    while(start < end):
+    for i in range(0, num_points - 1):
         start += (end - orig_start) / (num_points - 1)
         result.append(start)
     return result;
-
-def main():
-    x_coords = get_x_coords([-1, 1], 5);
+def do_the_thing(my_function, n):
+    x_coords = get_x_coords([-1, 1], n);
     actual_function_values = []
     for x in x_coords:
-        actual_function_values.append([x, f(x)]);
+        actual_function_values.append([x, my_function(x)]);
 
     x_plot = np.linspace(-1, 1, 1000)
     y_actual = []
     y_interp = []
     for i in range(0, len(x_plot)):
-        y_actual.append(f(x_plot[i]));
+        y_actual.append(my_function(x_plot[i]));
         y_interp.append(lagrange(x_plot[i], actual_function_values));
     
     plt.plot(x_plot, y_actual, label='Actual Function f(x)')
     plt.plot(x_plot, y_interp, '--', label='Lagrange Interpolation')
-    plt.scatter(x_coords, [f(x) for x in x_coords], color='red', label='Interpolation Nodes')
+    plt.scatter(x_coords, [my_function(x) for x in x_coords], color='red', label='Interpolation Nodes')
     plt.title('Lagrange Interpolation vs Actual Function')
     plt.xlabel('x')
     plt.ylabel('y')
     plt.legend()
     plt.grid(True)
     plt.show()
+def main():
+    functions = [f, g]
+    nums = [5, 8, 20]
+    for function in functions:
+        for num in nums:
+            do_the_thing(function, num)
 if __name__ == "__main__":
     main();
