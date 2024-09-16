@@ -44,10 +44,10 @@ def do_the_thing(my_function, n):
         y_actual.append(my_function(x_plot[i]));
         y_interp.append(lagrange(x_plot[i], actual_function_values));
     
-    plt.plot(x_plot, y_actual, label='Actual Function f(x)')
+    plt.plot(x_plot, y_actual, label=f'Actual Function {my_function.__name__}(x)')
     plt.plot(x_plot, y_interp, '--', label='Lagrange Interpolation')
     plt.scatter(x_coords, [my_function(x) for x in x_coords], color='red', label='Interpolation Nodes')
-    plt.title('Lagrange Interpolation vs Actual Function')
+    plt.title(f'Lagrange Interpolation vs Actual Function, n = {n}')
     plt.xlabel('x')
     plt.ylabel('y')
     plt.legend()

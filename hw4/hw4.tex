@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 \\ Homework 4}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{black},           % color for keywords
+  commentstyle=\color{black},          % color for comments
+  stringstyle=\color{black},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/f\_5.png}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/f\_8.png}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/f\_20.png}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/g\_5.png}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/g\_8.png}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/g\_20.png}
+\end{figure}
+\newpage
+code:\\
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+def lagrange(x, points):
+    lagrange_results = [];
+    for i in range(0, len(points)):
+        numerator = 1;
+        denominator = 1;
+        for j in range(0, len(points)):
+            if(i == j):
+                continue;
+            numerator *= (x - points[j][0]);
+            denominator *= (points[i][0] - points[j][0]);
+        lagrange_results.append(numerator / denominator);
+    result = 0;
+    for i in range(0, len(points)):
+        result += points[i][1] * lagrange_results[i]
+    return result;
+
+def f(x):
+    return 1 / (1 + 25 * x**2);
+def g(x):
+    return (abs(x)) ** (1/2);
+
+def get_x_coords(interval, num_points):
+    start = interval[0];
+    orig_start = start
+    end = interval[1];
+    result = [];
+    result.append(start);
+    for i in range(0, num_points - 1):
+        start += (end - orig_start) / (num_points - 1)
+        result.append(start)
+    return result;
+def do_the_thing(my_function, n):
+    x_coords = get_x_coords([-1, 1], n);
+    actual_function_values = []
+    for x in x_coords:
+        actual_function_values.append([x, my_function(x)]);
+
+    x_plot = np.linspace(-1, 1, 1000)
+    y_actual = []
+    y_interp = []
+    for i in range(0, len(x_plot)):
+        y_actual.append(my_function(x_plot[i]));
+        y_interp.append(lagrange(x_plot[i], actual_function_values));
+    
+    plt.plot(x_plot, y_actual, label=f'Actual Function {my_function.__name__}(x)')
+    plt.plot(x_plot, y_interp, '--', label='Lagrange Interpolation')
+    plt.scatter(x_coords, [my_function(x) for x in x_coords], color='red', label='Interpolation Nodes')
+    plt.title(f'Lagrange Interpolation vs Actual Function, n = {n}')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+def main():
+    functions = [f, g]
+    nums = [5, 8, 20]
+    for function in functions:
+        for num in nums:
+            do_the_thing(function, num)
+if __name__ == "__main__":
+    main();
+\end{lstlisting}
+\end{document}
