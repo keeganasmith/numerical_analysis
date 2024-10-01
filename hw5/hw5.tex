@@ -147,7 +147,7 @@ w_0 &= \int_{a}^b\frac{(x-x_1)(x-x_2)(x-x_3)}{(x_0-x_1)(x_0 - x_2)(x_0-x_3)}dx \
 &= \frac{1}{(-h)(-2h)(-3h)}\int_a^b(x^3 - x^2 \cdot x_3 - x^2 \cdot x_2 + x \cdot x_2 \cdot x_3 - x^2 \cdot x_1 + x \cdot x_1 \cdot x_3 + x_1 \cdot x_2 \cdot x - x_1 \cdot x_2 \cdot x_3)dx \\
 &=  \frac{1}{(-h)(-2h)(-3h)}\int_a^b(x^3 - x^2(x_3 + x_2 + x_1) + x(x_2 \cdot x_3 + x_1 \cdot x_3 + x_1 \cdot x_2)  - x_1 \cdot x_2 \cdot x_3 )dx \\
 &= \frac{1}{(-h)(-2h)(-3h)}(\frac{1}{4}(b^4 - a^4) - (x_3 + x_2 + x_1)(\frac{1}{3}(b^3 - a^3)) + (x_2 \cdot x_3 + x_1 \cdot x_3 + x_1 \cdot x_2)(\frac{1}{2})(b^2 - a^2)\\& \quad - (b - a)( x_1 \cdot x_2 \cdot x_3)) \\
-&= \frac{1}{-6h^3} ( \frac{1}{4} ( (a + 3h)^4 - a^4 ) - (3a + 6h) ( \frac{1}{3} ( (a+3h)^3 - a^3 ) )  \\ & \quad + ( (a+2h) \cdot (a+3h) + (a+h) \cdot (a+3h) + (a+h) \cdot (a+2h) ) \cdot \frac{1}{2} ( (a+3h)^2 - a^2 ) ) \\
+&= \frac{1}{-6h^3} ( \frac{1}{4} ( (a + 3h)^4 - a^4 ) - (3a + 6h) ( \frac{1}{3} ( (a+3h)^3 - a^3 ) )   - (b - a)( x_1 \cdot x_2 \cdot x_3)\\ & \quad + ( (a+2h) \cdot (a+3h) + (a+h) \cdot (a+3h) + (a+h) \cdot (a+2h) ) \cdot \frac{1}{2} ( (a+3h)^2 - a^2 ) ) \\
 &= \frac{1}{-6h^3} ( \frac{1}{4} ( a^4+12a^3h+54a^2h^2+108ah^3+81h^4 - a^4 ) - (3a + 6h) ( \frac{1}{3} ( (a+3h)^3 - a^3 ) )\\&\quad - (b - a)( x_1 \cdot x_2 \cdot x_3) \\ & \quad + ( (a+2h) \cdot (a+3h) + (a+h) \cdot (a+3h) + (a+h) \cdot (a+2h) ) \cdot \frac{1}{2} ( (a+3h)^2 - a^2 ) ) \\
 &= \frac{1}{-6h^3} ( \frac{1}{4} (12a^3h+54a^2h^2+108ah^3+81h^4 ) - (3a + 6h) ( \frac{1}{3} (9ha^2+27ah^2+27h^3 ) )\\&\quad - (b - a)( x_1 \cdot x_2 \cdot x_3) \\ & \quad + ( (a+2h) \cdot (a+3h) + (a+h) \cdot (a+3h) + (a+h) \cdot (a+2h) ) \cdot \frac{1}{2} ( (a+3h)^2 - a^2 ) ) \\
 &= \frac{1}{-6h^3} ( \frac{1}{4} (12a^3h+54a^2h^2+108ah^3+81h^4 ) - (54h^4+9ha^3+27a^2h^2+81ah^3+18h^2a^2)\\&\quad - (b - a)( x_1 \cdot x_2 \cdot x_3) \\ & \quad + ( (a+2h) \cdot (a+3h) + (a+h) \cdot (a+3h) + (a+h) \cdot (a+2h) ) \cdot \frac{1}{2} ( (a+3h)^2 - a^2 ) ) \\
@@ -186,5 +186,109 @@ I(f)  &= w_0 \cdot f(a) + w_1 \cdot f(a + h) + w_2 \cdot f(a + 2h) + w_3 \cdot f
 &= \frac{1}{-6h} (\frac{63}{4}h^2 - 18a^2 - 18h^3) \cdot (f(a) + f(b))\\&\quad + \frac{1}{2h^2}(\frac{9h^3}{4}+9ah^2+9a^2h+3a^3) \cdot (f(a + h) + f(a + 2h)) \\
 &= \frac{b - a}{8}(f(a) + 3f(a + h) + 3f(a + 2h) + f(b)) 
 \end{align*}
-
+\section*{Problem 3}
+\begin{enumerate}
+\item The trapezoidal rule (derived from Newton Cotes with $n=1$): \\
+\[
+\int_a^b f(x)dx \approx (b-a) \frac{1}{2}(f(a) + f(b))
+\]
+Thus we have: \\
+\begin{align*}
+\int_a^bf(x)dx &\approx (1 - 0) \cdot \frac{1}{2}(\frac{1}{1 + 2\cdot 0} + \frac{1}{1 + 2 \cdot 1}) \\
+&= \frac{1}{2}(1 + \frac{1}{3}) \\
+&= \frac{1}{2}(\frac{4}{3}) \\
+&= \frac{2}{3} \\
+\end{align*}
+\item Simpson's rule (derived from Newton Cotes with $n=2$): \\
+\[
+\int_a^b f(x)dx \approx  (b-a)\frac{1}{6}(f(a) + 4f(\frac{a + b}{2}) + f(b))
+\]
+So we have: \\
+\begin{align*}
+\int_a^b f(x)dx &\approx \frac{1}{6}(1 + 4 \cdot \frac{1}{1 + 2 \cdot \frac{1}{2}} + \frac{1}{3}) \\
+&= \frac{1}{6}(1 + 2 + \frac{1}{3}) \\
+&= \frac{10}{18} \\
+&= \frac{5}{9}
+\end{align*}
+\item I found that the error dipped below $10^{-6}$ for Newton Cotes with $n=10$ (so 11 evaluations of the integrand are required). \\
+This is the code I used: \\
+\begin{lstlisting}
+from scipy.integrate import newton_cotes
+import numpy as np
+ACTUAL =  0.5493064 
+def f(x):
+    return 1/(1 + 2*x)
+def n_point_rule(function, interval, n):
+    a = interval[0]
+    b = interval[1]
+    x = np.linspace(a, b, n + 1)
+    an, B = newton_cotes(n)
+    h = (b - a) / n
+    return h * np.sum(an * function(x))
+def n3(function, interval): #newton cotes, n=3
+    h = (interval[1] - interval[0]) / 3;
+    return 3/8 * h * (function(interval[0]) + 3 *function(interval[0] + h) + 3* function(interval[0] + 2*h) + function(interval[1]))
+def n4(function, interval):
+    h = (interval[1] - interval[0]) / 4;
+    a = interval[0]
+    return 2/45 * h * (7 * function(a) + 32 * function(a + h) + 12 * function(a + 2 * h) + 32 * function(a + 3* h) + 7 * function(interval[1])) 
+def n5(function, interval):
+    h = (interval[1] - interval[0]) / 5;
+    a = interval[0]
+    x_val = a;
+    index = 0
+    vals =[]
+    while(index < 6):
+        vals.append(function(x_val))
+        x_val += h
+        index += 1
+    return 5/288 * h * (19* vals[0] + 75 * vals[1] + 50 * vals[2] + 50 * vals[3] + 75 * vals[4] + 19 * vals[5])
+def n6(function, interval):
+    h = (interval[1] - interval[0]) / 6;
+    a = interval[0]
+    x_val = a;
+    index = 0
+    vals =[]
+    while(index < 7):
+        vals.append(function(x_val))
+        x_val += h
+        index += 1
+    return 1/140 * h * (41* vals[0] + 216 * vals[1] + 27 * vals[2] + 272 * vals[3] + 27 * vals[4] + 216 * vals[5] + 41 * vals[6])
+def n7(function, interval):
+    h = (interval[1] - interval[0]) / 7;
+    a = interval[0]
+    x_val = a;
+    index = 0
+    vals =[]
+    while(index < 8):
+        vals.append(function(x_val))
+        x_val += h
+        index += 1
+    return 7/17280 * h * (751* vals[0] + 3577 * vals[1] + 1323 * vals[2] + 2989 * vals[3] + 2989 * vals[4] + 1323 * vals[5] + 3577 * vals[6] + 751 * vals[7])
+def n8(function, interval):
+    h = (interval[1] - interval[0]) / 8;
+    a = interval[0]
+    x_val = a;
+    index = 0
+    vals =[]
+    while(index < 9):
+        vals.append(function(x_val))
+        x_val += h
+        index += 1
+    return 4/14175 * h * (989* vals[0] + 5888 * vals[1] - 928 * vals[2] + 10496 * vals[3] - 4540 * vals[4] + 10496 * vals[5] - 928 * vals[6] + 5888 * vals[7] + 989 * vals[8])
+def main():
+    interval = [0, 1]
+    print("n =3 error: ", abs(n3(f, interval) - ACTUAL))
+    print("n=4 error:", abs(n4(f, interval) - ACTUAL))
+    print("n=5 error:", abs(n5(f, interval) - ACTUAL))
+    print("n=6 error:", abs(n6(f, interval) - ACTUAL))
+    print("n=7 error:", abs(n7(f, interval) - ACTUAL))
+    print("n=8 error:", abs(n8(f, interval) - ACTUAL))
+    for i in range(9, 15):
+        print(f"n={i} error:", abs(n_point_rule(f, interval, i)) - ACTUAL)
+    
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{enumerate}
 \end{document}

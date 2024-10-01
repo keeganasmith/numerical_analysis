@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.8.24)  29 SEP 2024 17:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.8.24)  30 SEP 2024 18:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -380,6 +380,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 182--184
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
+
+ []
+
+
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.43335pt, for example:
 (fancyhdr)                \setlength{\headheight}{22.43335pt}.
@@ -387,17 +392,63 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
-[9] (hw5.aux)
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 194--196
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--215
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[10]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[12] (hw5.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5342 strings out of 474486
- 82219 string characters out of 5743283
- 2230542 words of memory out of 5000000
- 27602 multiletter control sequences out of 15000+600000
+ 5369 strings out of 474486
+ 82542 string characters out of 5743283
+ 2338542 words of memory out of 5000000
+ 27629 multiletter control sequences out of 15000+600000
  563471 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  79i,12n,93p,415b,1944s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -415,9 +466,9 @@ eegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:
 /cm/cmsy10.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmsy7.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/ty
 pe1/public/amsfonts/cm/cmtt9.pfb>
-Output written on hw5.pdf (9 pages, 352426 bytes).
+Output written on hw5.pdf (12 pages, 364943 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
+ 114 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
