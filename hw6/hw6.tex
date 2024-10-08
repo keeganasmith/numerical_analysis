@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 HW6}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{black},           % color for keywords
+  commentstyle=\color{black},          % color for comments
+  stringstyle=\color{black},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+\begin{document}
+\maketitle
+\section* {Problem 1}
+To do this we will need the first 3 legendre polynomials. Recall: \\
+\begin{align*}
+P_0(x) &= 1 \\
+P_1(x) &= x \\
+P_{n+1}(x) &= \frac{2n+1}{n+1}P_n(x) \cdot x - \frac{n}{n+1}P_{n-1}(x) \\
+\end{align*}
+Thus we have: \\
+\[
+P_2(x) = \frac{3}{2}x^2 - \frac{1}{2} \\
+\]
+\begin{align*}
+P_3(x) &= \frac{5}{3}(\frac{3}{2}x^2 - \frac{1}{2})\cdot x- \frac{2}{3}x \\
+&= \frac{5}{2}x^3 - \frac{5}{6}x - \frac{2}{3}x \\
+&= \frac{5}{2}x^3 - \frac{3}{2}x \\
+\end{align*}
+So for 2 point quadrature we will find $x_0, x_1$ such that:\\
+\begin{align*}
+P_2(x) &= 0 \\
+\frac{3}{2}x^2 - \frac{1}{2} &= 0 \\
+x^2 &= \frac{1}{3} \\
+x &=\pm \frac{\sqrt{3}}{3} \\
+\end{align*}
+So we have $x_0 = -\frac{\sqrt{3}}{3}, x_1 = \frac{\sqrt{3}}{3}$. Now we will find the weights according to newton cotes: \\
+\begin{align*}
+w_0 &= \int_{-1}^1L_0(x)dx \\
+&= \int_{-1}^1\frac{x - \frac{\sqrt{3}}{3}}{-\frac{\sqrt{3}}{3} - \frac{\sqrt{3}}{3}} \\
+&= \frac{1}{-\frac{2\sqrt{3}}{3}} \int_{-1}^1(x - \frac{\sqrt{3}}{3})dx \\
+&= -\frac{3}{2 \sqrt{3}}(\frac{1}{2}(1 - 1) - (\frac{\sqrt{3}}{3} - (- \frac{\sqrt{3}}{3}))) \\
+&= -\frac{\sqrt{3}}{2}( - \frac{2\sqrt{3}}{3})\\
+&= 1
+\end{align*}
+Weights in Newton Cotes are symmetrical so $w_1 = w_0$. Thus we have: \\
+\[
+\int_{-1}^1f(x) \approx f(-\frac{\sqrt{3}}{3}) + f(\frac{\sqrt{3}}{3})
+\]
+for 3 point quadrature: \\
+\begin{align*}
+P_3(x) &= 0\\
+\frac{5}{2}x^3 - \frac{3}{2}x &= 0\\
+x(\frac{5}{2}x^2 - \frac{3}{2}) &= 0 \\
+x(\frac{5x^2 - 3}{2}) &= 0 \\
+\end{align*}
+So the roots are $x = 0, -\sqrt{\frac{3}{5}}, \sqrt{\frac{3}{5}}$ \\
+The weights are: \\
+\begin{align*}
+w_0 &= \int_{-1}^1L_0(x)dx \\
+&= \int_{-1}^1 \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)}dx \\
+&= \frac{1}{(x_0 - x_1)(x_0 - x_2)}\int_{-1}^1(x - x_1)(x - x_2)dx \\
+&= \frac{1}{(-\sqrt{\frac{3}{5}} - 0)(-\sqrt{\frac{3}{5}} - \sqrt{\frac{3}{5}})} \cdot \int_{-1}^1(x - 0)(x - \sqrt{\frac{3}{5}})dx \\
+&= \frac{1}{-\sqrt{\frac{3}{5}} \cdot -2 \cdot \sqrt{\frac{3}{5}}} \cdot \int_{-1}^1(x^2 - x \cdot \sqrt{\frac{3}{5}})dx \\
+&= \frac{1}{2 \cdot \frac{3}{5}} \cdot (\frac{1}{3}(1 - (-1)) - \frac{1}{2} \cdot \sqrt{\frac{3}{5}}(1 - 1)) \\
+&= \frac{5}{6} \cdot \frac{2}{3} \\
+&= \frac{5}{9}
+\end{align*}
+\begin{align*}
+w_1 &= \int_{-1}^1L_1(x)dx \\
+&= \int_{-1}^1 \frac{(x - x_0)(x - x_2)}{(x_1- x_0)(x_1 - x_2)}dx \\
+&= \frac{1}{(x_1- x_0)(x_1 - x_2)} \int_{-1}^1 (x - x_0)(x - x_2)dx \\
+&= \frac{1}{(\sqrt{\frac{3}{5}})(-\sqrt{\frac{3}{5}})} \int_{-1}^1 (x + \sqrt{\frac{3}{5}})(x - \sqrt{\frac{3}{5}})dx \\
+&= \frac{1}{-\frac{3}{5}} \int_{-1}^1 (x^2 - \frac{3}{5})dx \\
+&= -\frac{5}{3}(\frac{1}{3}(2) - \frac{3}{5}(2)) \\
+&= -\frac{5}{3}(\frac{2}{3} - \frac{6}{5}) \\
+&= -\frac{10}{9} + \frac{18}{9} \\
+&= \frac{8}{9} \\
+\end{align*}
+The weights are symmetrical so $w_0 = w_2$, thus we have all of the weights $w_0 = \frac{5}{9}, w_1 = \frac{8}{9}, w_2 = \frac{5}{9}$. Our final answer is: \\
+\[
+\int_{-1}^1f(x)dx \approx \frac{5}{9}f(-\sqrt{\frac{3}{5}}) + \frac{8}{9}f(0) + \frac{5}{9}f(\sqrt{\frac{3}{5}}) \\
+\]
+\section*{Problem 2}
+To transform the bounds of the integral [-1, 1], we will need to substitute $x$ for a variable $u$ such that when $x = -1$, $u = 7$ and when $x = 1$, $u = 20$. We will use a linear transformation to do so: \\
+\begin{align*}
+x &= au + b
+-1 &= 7 \cdot a + b \\
+b &= -1 - 7 \cdot a \\
+1 &= 20 \cdot a + b \\
+1 &= 20 \cdot a -1 - 7 \cdot a \\
+1 &= 13 \cdot a - 1 \\
+a &= \frac{2}{13} \\
+b &= -1 - 7 \cdot \frac{2}{13} \\
+b &= -\frac{27}{13}\\
+\end{align*}
+Thus we will have the transformation $x = \frac{2}{13}u - \frac{27}{13}$, and the other way $u  = (x + \frac{27}{13}) \cdot \frac{13}{2}$: \\
+\begin{align*}
+\int_{-1}^1f(x)dx &= \int_{7}^{20}f( \frac{2}{13}u - \frac{27}{13})du \\
+\end{align*}
+Thus the Gaussian quadrature for the interval [7, 20] is:\\
+\begin{align*}
+\int_{7}^{20}f(x)dx &\approx \frac{13}{2} \cdot \frac{5}{9}f((-\sqrt{\frac{3}{5}} + \frac{27}{13}) \cdot \frac{13}{2}) + \frac{13}{2} \cdot \frac{8}{9}f((0 + \frac{27}{13}) \cdot \frac{13}{2}) + \frac{13}{2} \cdot \frac{5}{9}f((\sqrt{\frac{3}{5}} + \frac{27}{13}) \cdot \frac{13}{2})\\
+&\approx  \frac{13}{2} \cdot \frac{5}{9}f(\frac{13}{2} \cdot -\sqrt{\frac{3}{5}} + \frac{27}{2}) + \frac{13}{2} \cdot \frac{8}{9}f(\frac{27}{2}) +  \frac{13}{2} \cdot \frac{5}{9}f(\frac{13}{2} \cdot \sqrt{\frac{3}{5}} + \frac{27}{2})
+\end{align*}
+\section*{Problem 3}
+Definition: A quadrature rule has degree of precision k if it is exact for all polynomials of degree at most k. A gaussian quadrature rule should have degree of precision $2n + 1$. So the given quadrature rule should have degree of precision 3. We will verify this:\\
+For the interpolating function given, it ouputs the following for each function: \\
+\begin{align*}
+f(x) &= 1\\
+I &= 1 + 1 = 2
+\end{align*}
+which is correct ($\int_{-1}^11 = 2$). So $I$ has degree at least 0. \\
+\begin{align*}
+f(x) &= x \\
+I &= -\frac{\sqrt{3}}{3} + \frac{\sqrt{3}}{3} = 0
+\end{align*}
+which is correct ($f(x)$ is odd so it must be 0). So $I$ has degree at least 1. \\
+\begin{align*}
+f(x) &= x^2 \\
+I &= \frac{1}{3} + \frac{1}{3} = \frac{2}{3}
+\end{align*}
+which is correct. So $I$ has degree at least 2. \\
+\begin{align*}
+f(x) &= x^3 \\
+I &= 0
+\end{align*}
+which is correct. So $I$ has degree at least 3. \\
+\begin{align*}
+f(x) &= x^4 \\
+I &= \frac{1}{9} + \frac{1}{9} = \frac{2}{9} \\
+\end{align*}
+which is incorrect. $\int_{-1}^1x^4dx = \frac{2}{5}$. \\
+So the degree of precision is 3.
+\end{document}
