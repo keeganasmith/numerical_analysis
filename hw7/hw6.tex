@@ -1,3 +1,55 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 HW6}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{black},           % color for keywords
+  commentstyle=\color{black},          % color for comments
+  stringstyle=\color{black},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+\begin{document}
+\maketitle
+\section* {Problem 1}
+for h=.0004:
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\textwidth]{figs/both.png}
+\end{figure}
+\newpage
+I found that a very small step size h=.00004 causes backward and forward euler to be nearly equivalent. When h is large, forward euler blows up. Backward euler does not seem to blow up as quickly. 
+\begin{lstlisting}
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -133,4 +185,81 @@ def main():
     plot_rossler_both(backward_euler_results, forward_euler_results)
 if __name__ == "__main__":
     main();
-
+\end{lstlisting}
+\section*{Problem 2}
+\begin{enumerate}
+\item We want a system of equations such that $\frac{d}{dt}y_n(t) = y_{n+1}(t)$. Thus we will have: \\
+\begin{align*}
+y_1(t) &= y(t) \\
+y_2(t) &= y'(t) \\
+y_3(t) &= y''(t) \\
+y_4(t) &= y'''(t)
+\end{align*}
+Plugging in the values from the given equation: \\
+\begin{align*}
+y_4'(t) &= t^2 - 3 \cdot y_3(t) + \sin (t) \cdot y_2(t) - 8 \cdot y_1(t) \\
+y_3'(t)  &= y_4(t) \\
+y_2'(t) &= y_3(t) \\
+y_1'(t) &= y_2(t)\\
+\end{align*}
+Thus we have $y'(t) = f(t, x)$ where: \\
+\[
+f(t,x) =
+\begin{cases}
+x_2(t) \\
+x_3(t) \\
+x_4(t) \\
+t^2 - 3 \cdot x_3(t) + \sin (t) \cdot x_2(t) - 8 \cdot x_1(t) \\
+\end{cases} 
+\]
+\item For backward euler we have: \\
+\begin{align*}
+y_{n+1} &= y_n + h \cdot f(t_{n+1}, y_{n+1})\\
+\end{align*}
+where $f$ is the same function as we derived above. \\
+To find the $y_{n+1}$ on the rightside we will use newton iteration: \\
+\begin{align*}
+0 &= y_n + h \cdot f(t_{n+1}, y_{n+1}) - y_{n+1} \\
+0 &= y_n + h \cdot f(t_{n+1}, z) - z \quad \mbox{Substituting $y_{n+1}$ with $z$}
+\end{align*}
+Thus we are finding the root of the function: \\
+\begin{align*}
+G(z) &=  y_n + h \cdot f(t_{n+1}, z) - z \\
+G(z) &= \begin{bmatrix}
+y_1 + h \cdot z_2(t) - z_1(t) \\
+y_2 + h \cdot z_3(t) - z_2(t) \\
+y_3 + h \cdot z_4(t) - z_3(t) \\
+y_4 + h \cdot t^2 - 3 \cdot z_3(t) + \sin (t) \cdot z_2(t) - 8 \cdot z_1(t) - z_4(t) \\
+\end{bmatrix}
+\end{align*}
+Recall the newton scheme is given by: \\
+\[
+y_{n+1} = y_n - (J^{-1}F(z))F(z)
+\]
+The jacobian of $G(z)$ is:\\
+\[
+JG(z) = \begin{bmatrix}
+-1 & h & 0 & 0 \\
+0 & -1 & h & 0 \\
+0 & 0 & -1 & h \\
+-8 & sin(t) & -3 & -1 \\
+\end{bmatrix}
+\]
+Thus we have: \\
+\[
+z_{n+1} = y_n - \begin{bmatrix}
+-1 & h & 0 & 0 \\
+0 & -1 & h & 0 \\
+0 & 0 & -1 & h \\
+-8 & sin(t) & -3 & -1 \\
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+y_1 + h \cdot z_2(t) - z_1(t) \\
+y_2 + h \cdot z_3(t) - z_2(t) \\
+y_3 + h \cdot z_4(t) - z_3(t) \\
+y_4 + h \cdot t^2 - 3 \cdot z_3(t) + \sin (t) \cdot z_2(t) - 8 \cdot z_1(t) - z_4(t) \\
+\end{bmatrix}
+\]
+And whatever we get for $z_{n+1}$ we plug into $y_{n+1}$ on the rightside of the original backward euler scheme. We can then evaluate that equation to find the true $y_{n+1}$.
+\end{enumerate}
+\end{document}
