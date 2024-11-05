@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 HW8}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{black},           % color for keywords
+  commentstyle=\color{black},          % color for comments
+  stringstyle=\color{black},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+\begin{document}
+\maketitle
+\section* {Problem 1}
+Assuming we have: \\
+\[
+f(t, y(t)) = \lambda \cdot y(t)
+\]
+We can substitute into the original: \\
+\begin{align*}
+y_{n+1} &= y_n + \frac{1}{2} \cdot h \cdot \lambda \cdot (y_n + y_{n+1})\\ 
+y_{n+1} - \frac{1}{2} \cdot h \cdot \lambda \cdot y_{n+1} &= y_n + \frac{1}{2} \cdot h \cdot \lambda \cdot y_n \\
+y_{n+1}(1 - \frac{1}{2} \cdot h \cdot \lambda) &= y_n(1 + \frac{1}{2} \cdot h \cdot \lambda) \\
+y_{n+1} &= \frac{y_n(1 + \frac{1}{2} \cdot h \cdot \lambda)}{1 - \frac{1}{2} \cdot h \cdot \lambda}
+\end{align*}
+Thus we have the amplitude factor: \\
+\[
+w(z) = \frac{1 + \frac{1}{2} \cdot z}{1 - \frac{1}{2} \cdot z}
+\]
+We will call the real part of $\lambda$ $a$, and the imaginary part of $\lambda$ $b$. \\
+We will call the real part of $w(z)$ $w_r(z)$, and imaginary $w_i(z)$: \\
+\begin{align*}
+w_r(z) &= \frac{1 + \frac{1}{2}a}{1 - \frac{1}{2}a} \\
+\end{align*}
+\begin{align*}
+w_i(z) &= \frac{\frac{1}{2}b}{-\frac{1}{2}b} \\
+&= -1
+\end{align*}
+the rule is stable when $|w(z)| < 1$ so we have: \\
+\begin{align*}
+|w(z)| &= \sqrt{w_r(z)^2 + w_i(z)^2} \\
+\sqrt{w_r(z)^2 + w_i(z)^2} &< 1 \\
+\sqrt{(\frac{1 + \frac{1}{2}a}{1 - \frac{1}{2}a})^2 + 1} &< 1 \\
+(\frac{1 + \frac{1}{2}a}{1 - \frac{1}{2}a})^2 &< 1 \\
+\frac{1 + a + \frac{1}{4}a^2}{1 - a + \frac{1}{4}a^2} &<1 \\
+1 + a + \frac{1}{4}a^2 &< 1 - a + \frac{1}{4}a^2 \\
+2a &< 0 \\
+a &< 0 \\
+\end{align*}
+This when the real part of $\lambda$ is less than 0, the trapezoidal rule is stable. \\
+\section*{Problem 2}
+again assuming $f(t, y(t)) = \lambda \cdot y(t)$: \\
+\begin{align*}
+y_{n+1} &= y_n + h \cdot f(t_n + \frac{1}{2}h, y_n + \frac{1}{2} \cdot h \cdot \lambda \cdot y_n) \\
+y_{n+1} &= y_n + h \cdot \lambda \cdot ( y_n + \frac{1}{2} \cdot h \cdot \lambda \cdot y_n) \\
+y_{n+1} &= y_n + h \cdot \lambda \cdot y_n + h \cdot \lambda \cdot  \frac{1}{2} \cdot h \cdot \lambda \cdot y_n \\
+y_{n+1} &= y_n + h \cdot \lambda \cdot y_n + \frac{1}{2} \cdot h^2 \cdot \lambda^2 \cdot y_n \\
+y_{n+1} &= y_n(1 + h \cdot \lambda + \frac{1}{2} \cdot h^2 \cdot \lambda^2)
+\end{align*}
+thus we have: \\
+\[
+w(z) = 1 + z + \frac{1}{2}z^2
+\]
+Testing the points yields a Hyperboloid looking figure, where the function is stable within the hyperboloid: \\
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\textwidth]{figs/Figure\_1.png}
+\end{figure}
+\newpage
+\begin{lstlisting}
+import random
+import matplotlib.pyplot as plt
+class Complex:
+    def __init__(self, real, imaginary):
+        self.real = real
+        self.imaginary = imaginary
+    def magnitude(self):
+        return (self.real**2 + self.imaginary**2) ** .5
+    def add(a, b):
+        return Complex(a.real + b.real, a.imaginary + b.imaginary)
+    def square(a):
+        return Complex(a.real**2 - a.imaginary**2, 2 * a.real * a.imaginary)
+def w(z):
+    one = Complex(1, 0)
+    z_square = Complex.square(z)
+    z_square_term = Complex(1/2 * z_square.real, 1/2 * z_square.imaginary)
+    result = Complex.add(one, Complex.add(z_square, z_square_term))
+    return result
+def magnitude(z):
+    return w(z).magnitude()
+
+def plot(bad_points, good_points):
+    plt.scatter(*zip(*good_points), color='blue', label='Good Points', alpha=0.6)
+    plt.scatter(*zip(*bad_points), color='red', label='Bad Points', alpha=0.6)
+    plt.xlabel("Real Part")
+    plt.ylabel("Imaginary Part")
+    plt.legend()
+    plt.title("Scatter Plot of Good and Bad Points")
+    plt.show()
+    return
+
+def generate_points(real_interval, imag_interval, num_points):
+    result = []
+    for i in range(0, num_points):
+        real = random.uniform(real_interval[0], real_interval[1])
+        imag = random.uniform(imag_interval[0], imag_interval[1])
+        result.append([real, imag])
+    return result
+
+def main():
+    real_interval = [-1, 1]
+    imag_interval = [-2, 2]
+    num_points = 100000
+    points = generate_points(real_interval,imag_interval,  num_points)
+    good_points = []
+    bad_points = []
+    for i in range(0, len(points)):
+        my_complex = Complex(points[i][0], points[i][1])
+        my_magnitude = magnitude(my_complex)
+        if(my_magnitude < 1):
+            good_points.append(points[i])
+        else:
+            bad_points.append(points[i])
+    plot(bad_points, good_points)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\end{document}
