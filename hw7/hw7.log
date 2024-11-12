@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.8.24)  4 NOV 2024 21:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.8.24)  20 OCT 2024 18:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./hw8.tex
-(hw8.tex
+**./hw7.tex
+(hw7.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\keegan\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -348,8 +348,9 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 85.
 )
 \Hy@SectionHShift=\skip63
-) (hw8.aux)
-\openout1 = `hw8.aux'.
+)
+No file hw7.aux.
+\openout1 = `hw7.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
 LaTeX Font Info:    ... okay on input line 42.
@@ -397,76 +398,91 @@ cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring ON on input line 42.
- (hw8.out) (hw8.out)
 \@outlinefile=\write3
-\openout3 = `hw8.out'.
+\openout3 = `hw7.out'.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 45--46
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 48--50
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 55--57
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 59--62
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 68--70
-
- []
-
-[1
-
-{C:/Users/keegan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 77--79
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 87--89
-
- []
-
-<figs/Figure_1.png, id=17, 462.528pt x 346.896pt>
-File: figs/Figure_1.png Graphic file (type png)
-<use figs/Figure_1.png>
-Package pdftex.def Info: figs/Figure_1.png  used on input line 95.
+<figs/both.png, id=3, 462.528pt x 346.896pt>
+File: figs/both.png Graphic file (type png)
+<use figs/both.png>
+Package pdftex.def Info: figs/both.png  used on input line 48.
 (pdftex.def)             Requested size: 345.0pt x 258.76335pt.
+ [1
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+{C:/Users/keegan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./figs/both
+.png>] [2] [3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
 
-[2] [3 <./figs/Figure_1.png>] [4] (hw8.aux)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--199
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--206
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 224--226
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 234--236
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--240
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 247--249
+
+ []
+
+
+Overfull \hbox (93.6188pt too wide) detected at line 262
+\OML/cmm/m/it/10 z[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 y[] \OMS/cmsy/m/n/10 ^^
+@ [][] []
+ []
+
+[6] (hw7.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-Package rerunfilecheck Info: File `hw8.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+Package rerunfilecheck Warning: File `hw7.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `hw7.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12154 strings out of 474486
- 189274 string characters out of 5743283
- 2146542 words of memory out of 5000000
- 34245 multiletter control sequences out of 15000+600000
+ 12236 strings out of 474486
+ 190512 string characters out of 5743283
+ 2315542 words of memory out of 5000000
+ 34251 multiletter control sequences out of 15000+600000
  563471 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,12n,93p,241b,1968s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,14n,93p,241b,1964s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmex10.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type
@@ -479,10 +495,11 @@ eegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:
 /Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7
 .pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmtt9.pfb>
-Output written on hw8.pdf (4 pages, 173124 bytes).
+c/amsfonts/cm/cmsy7.pfb><C:/Users/keegan/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmtt9.pfb>
+Output written on hw7.pdf (6 pages, 237346 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
+ 264 PDF objects out of 1000 (max. 8388607)
+ 147 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
