@@ -1,0 +1,272 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+% Define macros for title and author
+\newcommand{\thetitle}{MATH 417 502 \\ Homework 10}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{black},           % color for keywords
+  commentstyle=\color{black},          % color for comments
+  stringstyle=\color{black},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+\begin{document}
+\maketitle
+\section* {Problem 1}
+\begin{enumerate}
+\item implementation: \\
+\begin{lstlisting}
+def back_sub(A, b):
+    i = len(A) -1 
+    coefficients = [0] * len(b)
+    while(i >= 0):
+        row_sum = 0
+        j = len(A) - 1
+        while(j > i):
+            row_sum += A[i][j] * coefficients[j]
+            j -= 1
+        b[i][0] -= row_sum
+        coefficients[i] = b[i][0] / A[i][i]
+        i -= 1
+    return coefficients
+def forward_sub(A, b):
+    coefficients = [0] * len(A)
+    for i in range(0, len(A)):
+        sum_row = 0
+        for j in range(0, i ):
+            sum_row += A[i][j] * coefficients[j]
+        result = b[i] - sum_row
+        coefficients[i] = result / A[i][i]
+    return coefficients
+def inner_product(a, b):
+    result = 0
+    for i in range(0, len(a)):
+        result += a[i] * b[i]
+    return result
+def multiply_by_scalar(a, scalar):
+    result = []
+    for i in range(0, len(a)):
+        result.append(a[i] * scalar)
+    return result
+def add_vectors(a, b):
+    result = []
+    for i in range(0, len(a)):
+        result.append(a[i] + b[i])
+    return result
+def norm(a):
+    result = 0
+    for value in a:
+        result += value**2
+    return result ** .5
+def subtract_vectors(a, b):
+    return add_vectors(a, multiply_by_scalar(b, -1))
+def gram_sum(i, v, theta, m):
+    result = [0] * m
+    for k in range(0, i):
+        inner = inner_product(v[i], theta[k])
+        intermed = multiply_by_scalar(theta[k], inner)
+        result = add_vectors(intermed, result)
+    return result
+def transpose(A):
+    result = []
+    for i in range(0, len(A[0])):
+        result.append([0] * len(A))
+    for i in range(0, len(A)):
+        for j in range(0, len(A[0])):
+            result[j][i] = A[i][j]
+    return result
+def gram_schmidt(A):
+    w = []
+    v = []
+    theta = []
+    v = transpose(A)    
+    m = len(v[0])
+    for i in range(0, len(v)):
+        print(theta)
+        summation = gram_sum(i, v, theta, m)
+        w.append(subtract_vectors(v[i], summation))
+        print(w)
+        w_norm = norm(w[i])
+        theta.append(multiply_by_scalar(w[i], 1/w_norm))
+    Q = transpose(theta)
+    R = []
+    for i in range(0, len(v)):
+        R.append([0] * len(v))
+        R[i][i] = norm(w[i])
+        for j in range(i+1, len(v)):
+            R[i][j] = inner_product(v[j], theta[i])
+    
+    return Q, R
+def to_string(A):
+    result = ""
+    for i in range(0, len(A)):
+        for j in range(0, len(A[0])):
+            result += str(A[i][j]) + " "
+        result += "\n"
+    return result
+def row_col_product(A, B, i, j):
+    result = 0
+    for k in range(0, len(A[i])):
+        
+        result += A[i][k] * B[k][j]
+    return result
+def multiply(A, B):
+    result = []
+    for i in range(0, len(A)):
+        result.append([0] * len(B[0]))
+    for i in range(0, len(A)):
+        for j in range(0, len(B[0])):
+            result[i][j] = row_col_product(A, B, i, j)
+    return result
+def convert_matrix_to_latex(A):
+    result = "\\begin{bmatrix}\n"
+    for i in range(0, len(A)):
+        for j in range(0, len(A[i])):
+            result += str(A[i][j]) + " & "
+        result += "\\\\\n"
+    result += "\\end{bmatrix}\n"
+    return result
+def solve(Q, R, b):
+    Q_transpose = transpose(Q)
+    Q_transpose_b = multiply(Q_transpose, b)
+    result = back_sub(R, Q_transpose_b)
+    return result
+def main():
+    A = [
+        [1, 1, 2, 3],
+        [2, 2, 2, 2], 
+        [4, 3, 2, 2],
+        [1, 1, 2, 3],
+        [3, 1, 2, 3]
+    ]
+    
+    Q, R = gram_schmidt(A)
+    print("Q:")
+    print(to_string(Q))
+    print("R:")
+    print(to_string(R))
+    print("QR (should be equivalent to A):")
+    mult_result = multiply(Q, R)
+    print(to_string(mult_result))
+    print("Q in latex:")
+    print(convert_matrix_to_latex(Q))
+    print("R in latex:")
+    print(convert_matrix_to_latex(R))
+    B = [[2], [5], [7], [2], [3]]
+    result = solve(Q, R, B)
+    print(result)
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\item Q: \\
+\[
+\begin{bmatrix}
+0.1796053020267749 & 0.24217973984824143 & 0.5664411840370205 & 0.29704426289300906 & \\
+0.3592106040535498 & 0.48435947969648285 & 0.0944068640061698 & -0.7921180343813354 & \\
+0.7184212081070996 & 0.2179617658634174 & -0.5286784384345531 & 0.39605901719066944 & \\
+0.1796053020267749 & 0.24217973984824143 & 0.5664411840370205 & 0.29704426289300906 & \\
+0.5388159060803247 & -0.7749751675143725 & 0.26433921921727643 & -0.19802950859533192 & \\
+\end{bmatrix}
+\]
+\\
+R:
+\[
+\begin{bmatrix}
+5.5677643628300215 & 3.7717113425622726 & 3.951316644589048 & 4.849343154722922 & \\
+0 & 1.3319885691653277 & 0.8234111154840213 & 0.5327954276661315 & \\
+0 & 0 & 1.9259000257258707 & 3.3231216130171854 & \\
+0 & 0 & 0 & 0.39605901719066977 & \\
+\end{bmatrix}
+\]
+Solving for $y$ yields: \\
+\[
+\begin{bmatrix}
+\frac{1}{2} \\
+1 \\
+2.5 \\
+-1.5
+\end{bmatrix}
+\]
+\end{enumerate}
+\section*{Problem 2}
+Following the gram schmidt algorithm: \\
+\begin{align*}
+w_{0} &= \begin{bmatrix}1 \\ 1 \\ 2 \end{bmatrix} - 0 \\
+&= \begin{bmatrix}1 \\ 1 \\ 2 \end{bmatrix} \\
+\theta_{0} &= \frac{1}{\sqrt{6}}  \begin{bmatrix}1 \\ 1 \\ 2 \end{bmatrix} \\
+&= \begin{bmatrix}\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix}
+\end{align*}
+\begin{align*}
+w_{1} &= \begin{bmatrix}2 \\2 \\1\end{bmatrix} - (\frac{2}{\sqrt{6}} + \frac{2}{\sqrt{6}} + \frac{1}{\sqrt{6}}) \begin{bmatrix}\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{6}} \\ \frac{2}{\sqrt{6}} \end{bmatrix} \\
+&= \begin{bmatrix}2 - \frac{5}{6} \\ 2 - \frac{5}{6} \\ 2 - \frac{5}{3}\end{bmatrix} \\ 
+&= \begin{bmatrix}\frac{7}{6} \\ \frac{7}{6} \\ \frac{1}{3} \end{bmatrix} \\ 
+\theta_{1} &= \frac{1}{\sqrt{\frac{17}{6}}} \cdot \begin{bmatrix}\frac{7}{6} \\ \frac{7}{6} \\ \frac{1}{3} \end{bmatrix} \\
+&= \frac{6 \sqrt{\frac{17}{6}}}{17} \cdot \begin{bmatrix}\frac{7}{6} \\ \frac{7}{6} \\ \frac{1}{3} \end{bmatrix} \\
+&= \begin{bmatrix}\frac{7 \cdot \sqrt{\frac{17}{6}}}{17} \\ \frac{7 \cdot \sqrt{\frac{17}{6}}}{17} \\ \frac{2 \cdot  \sqrt{\frac{17}{6}}}{17} \end{bmatrix} \\
+\end{align*}
+So we have: \\
+\[
+Q = \begin{bmatrix}
+\frac{1}{\sqrt{6}} & \frac{7 \cdot \sqrt{\frac{17}{6}}}{17} \\ \frac{1}{\sqrt{6}} & \frac{7 \cdot \sqrt{\frac{17}{6}}}{17} \\ \frac{2}{\sqrt{6}} & \frac{2 \cdot  \sqrt{\frac{17}{6}}}{17}
+\end{bmatrix}
+\]
+\[
+R = \begin{bmatrix}
+\sqrt{6} & \frac{5}{\sqrt{6}} \\
+0 & \sqrt{\frac{17}{6}}
+\end{bmatrix}
+\]
+We need to solve: \\
+\begin{align*}
+Ax &= y \\
+QRx &= y \\
+Q^TQRx &= Q^Ty \\
+Rx &= Q^Ty
+\end{align*}
+$Q^Ty$ is: \\
+\[
+\begin{bmatrix}
+5.30722777603022\\
+2.3094010767585016 \\
+\end{bmatrix}
+\]
+So back substitution yields:\\
+\[
+x = \begin{bmatrix} \frac{5}{6} \\ \frac{4}{3} \end{bmatrix}
+\]
+\end{document}
